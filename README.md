@@ -4,7 +4,7 @@ Com a necessidade de verificar a identidade do cliente que está solicitando alg
 # Como instalar
 Para instalar é muito simples, antes de tudo edite seu arquivo (pin.php)! <br/>
 Linhas para editar: <br/>
-- Linha 14/24/37: Defina um limite para o PIN (todas as linhas devem ter o mesmo limite)<br/>
+- Linha 13: Defina um limite de números para o PIN<br/>
 Após edita-lo você deverá enviar para /includes/hooks/ <br/>
 
 # Créditos
