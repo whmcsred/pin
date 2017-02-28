@@ -10,7 +10,7 @@ if (!defined("WHMCS")){
 }
 // Monta o PIN
 function montar_pin($id){
-	$limite = 6;
+	$limite = 5;
 	$montar = md5($id);
 	$montar = preg_replace("/[^0-9]/", "", $montar);
 	$quantidade_numeros = mb_strlen($montar);
@@ -47,4 +47,10 @@ add_hook("IntelligentSearch", 1, function($vars){
 		</div>';
 	}
 	return $pesquisa;
+});
+// Adiciona string para os templates de email
+add_hook("EmailPreSend", 1, function($vars){
+	$pinstring = array();
+	$pinstring["pin"] = montar_pin($vars['relid']);
+	return $pinstring;
 });
