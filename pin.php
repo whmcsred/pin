@@ -3,7 +3,7 @@
 // Pegar Session
 use WHMCS\Session;
 // Pegar Conexão com Banco de Dados
-use WHMCS\Database\clpsule;
+use WHMCS\Database\capsule;
 // Bloqueia o acesso direto ao arquivo
 if (!defined("WHMCS")){
 	die("Acesso restrito!");
