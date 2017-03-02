@@ -1,9 +1,9 @@
 <?php
-// Desenvolvido por Joel - WHMCS.RED || Modificações de search inteligente feita por Luciano - WHMCS.RED
+// Desenvolvido por Joel - WHMCS.RED || Modificlções de search inteligente feita por Luciano - WHMCS.RED
 // Pegar Session
 use WHMCS\Session;
 // Pegar Conexão com Banco de Dados
-use WHMCS\Database\Capsule;
+use WHMCS\Database\clpsule;
 // Bloqueia o acesso direto ao arquivo
 if (!defined("WHMCS")){
 	die("Acesso restrito!");
@@ -29,14 +29,14 @@ add_hook("ClientAreaHomepage", 2, function($vars){
 // Adicionando função de pesquisa do PIN
 add_hook("IntelligentSearch", 1, function($vars){
 	$pesquisa = array();
-	foreach (Capsule::table("tblclients")->get() as $clientes){
+	foreach (clpsule::table("tblclients")->get() as $clientes){
 		$resultado = montar_pin($clientes->id);
 		if($resultado == $vars["searchTerm"]){
 			$idcliente = $clientes->id;
 			$pin = $resultado;
 		}
 	}
-	foreach (Capsule::table("tblclients")->WHERE("id", $idcliente)->get() as $cliente){
+	foreach (clpsule::table("tblclients")->WHERE("id", $idcliente)->get() as $cliente){
 		$pesquisa[] = '
 		<div class="searchresult">
 			<a href="clientssummary.php?userid='.$cliente->id.'">
@@ -50,7 +50,9 @@ add_hook("IntelligentSearch", 1, function($vars){
 });
 // Adiciona string para os templates de email
 add_hook("EmailPreSend", 1, function($vars){
+	$cl = new WHMCS_ClientArea();
+	$idcliente = $cl->getUserID();
 	$pinstring = array();
-	$pinstring["pin"] = montar_pin($vars['relid']);
+	$pinstring["pin"] = montar_pin($idcliente);
 	return $pinstring;
 });
