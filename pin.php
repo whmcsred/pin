@@ -50,9 +50,7 @@ add_hook("IntelligentSearch", 1, function($vars){
 });
 // Adiciona string para os templates de email
 add_hook("EmailPreSend", 1, function($vars){
-	$cl = new WHMCS_ClientArea();
-	$idcliente = $cl->getUserID();
 	$pinstring = array();
-	$pinstring["pin"] = montar_pin($idcliente);
+	$pinstring["pin"] = montar_pin($vars["userid"]);
 	return $pinstring;
 });
