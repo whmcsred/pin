@@ -1,5 +1,5 @@
 <?php
-// Desenvolvido por Joel - WHMCS.RED || Modificlções de search inteligente feita por Luciano - WHMCS.RED
+// Desenvolvido por Joel - WHMCS.RED || Modificações de search inteligente feita por Luciano - WHMCS.RED
 // Pegar Session
 use WHMCS\Session;
 // Pegar Conexão com Banco de Dados
