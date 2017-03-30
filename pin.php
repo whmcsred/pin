@@ -14,7 +14,7 @@ function montar_pin($id){
 	$montar = md5($id);
 	$montar = preg_replace("/[^0-9]/", "", $montar);
 	$quantidade_numeros = mb_strlen($montar);
-	$contar = $limite - quantidade_numeros;
+	$contar = $limite - $quantidade_numeros;
 	$resultado = substr($montar, $limite, $contar);
 	return $resultado;
 }
