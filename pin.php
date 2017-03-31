@@ -13,9 +13,7 @@ function montar_pin($id){
 	$limite = 5;
 	$montar = md5($id);
 	$montar = preg_replace("/[^0-9]/", "", $montar);
-	$quantidade_numeros = mb_strlen($montar);
-	$contar = $limite - $quantidade_numeros;
-	$resultado = substr($montar, $limite, $contar);
+	$resultado = substr($montar, $limite, $limite);
 	return $resultado;
 }
 // Página de Administrador
