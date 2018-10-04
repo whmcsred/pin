@@ -10,7 +10,7 @@ if (!defined("WHMCS")){
 }
 // Monta o PIN
 function montar_pin($id){
-	$limite = 5;
+	$limite = 6;
 	$montar = md5($id);
 	$montar = preg_replace("/[^0-9]/", "", $montar);
 	$resultado = substr($montar, $limite, $limite);
@@ -21,8 +21,33 @@ add_hook("AdminAreaClientSummaryPage", 1, function($vars){
 	return "<div class='alert alert-success'><strong>PIN: ".montar_pin($vars["userid"])."</strong></div>";
 });
 // Página do Cliente
-add_hook("ClientAreaHomepage", 2, function($vars){
-	return "<div class='alert alert-success'><strong>PIN: ".montar_pin($_SESSION["uid"])."</strong></div>";
+add_hook("ClientAreaHomepagePanels", 1, function($homePagePanels){
+    $newPanel = $homePagePanels->addChild(
+        "whmcsred-pin",
+        array(
+            "name" => "PIN",
+            "label" => "PIN",
+            "icon" => "fa-key",
+            "order" => "99",
+            "extras" => array(
+                "color" => "green"
+            )
+        )
+    );
+    $newPanel->addChild(
+        "whmcsred-pin-1",
+        array(
+            "label" => "<span style='font-size:15px;'>PIN para Atendimento: <strong><kbd style='background-color:#5cb85c;'>".montar_pin($_SESSION["uid"])."</kbd></strong><span>",
+            "order" => 10
+        )
+    );
+    $newPanel->addChild(
+        "whmcsred-pin-2",
+        array(
+            "label" => "Você deverá informar esse PIN no Atendimento Online assim que for solicitado por um dos nossos atendentes.",
+            "order" => 11
+        )
+    );
 });
 // Adicionando função de pesquisa do PIN
 add_hook("IntelligentSearch", 1, function($vars){
